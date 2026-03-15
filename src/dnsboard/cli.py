@@ -62,6 +62,8 @@ def interactive_preset_selection() -> list[str] | None:
 
 
 def maybe_save_preset(domains: list[str]) -> None:
+    if not sys.stdin.isatty():
+        return
     try:
         answer = input("Save as preset? (y/n): ").strip().lower()
     except (EOFError, KeyboardInterrupt):

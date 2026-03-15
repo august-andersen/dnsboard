@@ -99,7 +99,10 @@ def fetch_whois(domain: str) -> dict:
 
         days_until_expiry = None
         if expiration and isinstance(expiration, datetime):
-            days_until_expiry = (expiration - datetime.now()).days
+            now = datetime.now(timezone.utc)
+            if expiration.tzinfo is None:
+                expiration = expiration.replace(tzinfo=timezone.utc)
+            days_until_expiry = (expiration - now).days
 
         return {
             "registrar": w.registrar,
