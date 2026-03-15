@@ -146,6 +146,52 @@ def fetch_ping(domain: str) -> dict:
     return {"is_up": False, "error": "Could not connect", "timestamp": timestamp}
 
 
+PUBLIC_RESOLVERS = [
+    ("Google", "8.8.8.8"),
+    ("Cloudflare", "1.1.1.1"),
+    ("Quad9", "9.9.9.9"),
+    ("OpenDNS", "208.67.222.222"),
+    ("AdGuard", "94.140.14.14"),
+]
+
+
+def fetch_dns_propagation(domain: str) -> list[dict]:
+    results = []
+
+    def query_resolver(name, ip):
+        r = dns.resolver.Resolver()
+        r.nameservers = [ip]
+        r.lifetime = 5
+        try:
+            answers = r.resolve(domain, "A")
+            return {
+                "resolver": name,
+                "ip": ip,
+                "records": sorted([str(a) for a in answers]),
+                "status": "ok",
+            }
+        except dns.resolver.NXDOMAIN:
+            return {"resolver": name, "ip": ip, "records": [], "status": "nxdomain"}
+        except dns.exception.Timeout:
+            return {"resolver": name, "ip": ip, "records": [], "status": "timeout"}
+        except Exception as e:
+            return {"resolver": name, "ip": ip, "records": [], "status": str(e)}
+
+    with ThreadPoolExecutor(max_workers=len(PUBLIC_RESOLVERS)) as pool:
+        futures = {pool.submit(query_resolver, name, ip): name
+                   for name, ip in PUBLIC_RESOLVERS}
+        for fut in as_completed(futures):
+            results.append(fut.result())
+
+    # Check consistency
+    ok_records = [set(r["records"]) for r in results if r["status"] == "ok" and r["records"]]
+    consistent = len(ok_records) > 1 and all(s == ok_records[0] for s in ok_records)
+    for r in results:
+        r["consistent"] = consistent
+
+    return results
+
+
 def fetch_all(domains: list[str]) -> dict:
     results = {d: {} for d in domains}
     max_workers = min(len(domains) * 4, 20)
@@ -154,7 +200,8 @@ def fetch_all(domains: list[str]) -> dict:
         futures = {}
         for domain in domains:
             for name, func in [("dns", fetch_dns), ("ssl", fetch_ssl),
-                               ("whois", fetch_whois), ("ping", fetch_ping)]:
+                               ("whois", fetch_whois), ("ping", fetch_ping),
+                               ("propagation", fetch_dns_propagation)]:
                 fut = pool.submit(func, domain)
                 futures[fut] = (domain, name)
 

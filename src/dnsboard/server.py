@@ -4,7 +4,7 @@ import webbrowser
 from flask import Flask, jsonify, Response
 
 from dnsboard.dashboard import get_dashboard_html
-from dnsboard.fetcher import fetch_all, fetch_pings
+from dnsboard.fetcher import fetch_all, fetch_pings, fetch_dns_propagation, fetch_ping
 
 
 def create_app(domains: list[str], initial_data: dict | None = None) -> Flask:
@@ -31,6 +31,19 @@ def create_app(domains: list[str], initial_data: dict | None = None) -> Flask:
 
         data["_meta"] = {"domains": domains}
         return jsonify(data)
+
+    @app.route("/api/ping")
+    def api_ping():
+        pings = fetch_pings(domains)
+        pings["_meta"] = {"domains": domains}
+        return jsonify(pings)
+
+    @app.route("/api/propagation/<domain>")
+    def api_propagation(domain):
+        if domain not in domains:
+            return jsonify({"error": "Domain not monitored"}), 404
+        results = fetch_dns_propagation(domain)
+        return jsonify({"domain": domain, "resolvers": results})
 
     @app.route("/api/refresh", methods=["POST"])
     def api_refresh():
