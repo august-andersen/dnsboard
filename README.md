@@ -9,13 +9,13 @@ Run `dnsboard example.com` and a browser opens with a live monitoring dashboard.
 ### Recommended: pipx
 
 ```bash
-pipx install git+<repo-url>
+pipx install git+[<repo-url>](https://github.com/august-andersen/dnsboard.git)
 ```
 
 Or from a local clone:
 
 ```bash
-git clone <repo-url> && cd dnsboard
+git clone [<repo-url>](https://github.com/august-andersen/dnsboard.git) && cd dnsboard
 pipx install .
 ```
 
@@ -24,7 +24,7 @@ pipx install .
 On macOS, `pip install` is restricted system-wide. Use a virtual environment instead:
 
 ```bash
-git clone <repo-url> && cd dnsboard
+git clone [<repo-url>](https://github.com/august-andersen/dnsboard.git) && cd dnsboard
 python3 -m venv .venv
 source .venv/bin/activate
 pip install .
