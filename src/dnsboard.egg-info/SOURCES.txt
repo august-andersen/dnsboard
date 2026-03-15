@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/dnsboard/__init__.py
+src/dnsboard/cli.py
+src/dnsboard/dashboard.py
+src/dnsboard/fetcher.py
+src/dnsboard/presets.py
+src/dnsboard/server.py
+src/dnsboard.egg-info/PKG-INFO
+src/dnsboard.egg-info/SOURCES.txt
+src/dnsboard.egg-info/dependency_links.txt
+src/dnsboard.egg-info/entry_points.txt
+src/dnsboard.egg-info/requires.txt
+src/dnsboard.egg-info/top_level.txt
