@@ -6,8 +6,27 @@ Run `dnsboard example.com` and a browser opens with a live monitoring dashboard.
 
 ## Installation
 
+### Recommended: pipx
+
+```bash
+pipx install git+<repo-url>
+```
+
+Or from a local clone:
+
 ```bash
 git clone <repo-url> && cd dnsboard
+pipx install .
+```
+
+### Alternative: pip + venv
+
+On macOS, `pip install` is restricted system-wide. Use a virtual environment instead:
+
+```bash
+git clone <repo-url> && cd dnsboard
+python3 -m venv .venv
+source .venv/bin/activate
 pip install .
 ```
 
