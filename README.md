@@ -48,12 +48,14 @@ dnsboard --delete-preset my-apps       # Delete a preset
 
 On first run with domains, you'll be prompted to save them as a preset for quick access later.
 
-## What it monitors
+## Features
 
+- **Uptime Monitoring** — live HTTP pings every 2 seconds with response time charts
 - **DNS Records** — A, AAAA, MX, NS, TXT, CNAME, SOA
-- **SSL Certificates** — issuer, expiry date, days remaining (alerts at <30 days)
+- **DNS Propagation** — checks against Google, Cloudflare, Quad9, OpenDNS, and AdGuard
+- **SSL Certificates** — issuer, expiry, days remaining (alerts at <30 days)
 - **WHOIS** — registrar, creation/expiry dates (alerts at <60 days)
-- **Uptime** — live HTTP ping every 30 seconds with response time
+- **Domain Presets** — save and reload domain lists for quick access
 
 ## License
 
