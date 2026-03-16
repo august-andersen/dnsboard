@@ -9,8 +9,6 @@
 [![Flask](https://img.shields.io/badge/flask-backend-000?logo=flask&logoColor=white)](https://flask.palletsprojects.com)
 [![pipx](https://img.shields.io/badge/install-pipx-blue?logo=pypi&logoColor=white)](https://pipx.pypa.io)
 
-Run `dnsboard example.com` and a browser opens with a live monitoring dashboard.
-
 ![dnsboard demo](demo.gif)
 
 </div>
