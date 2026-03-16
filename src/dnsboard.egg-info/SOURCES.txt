@@ -1,6 +1,8 @@
+.gitattributes
 LICENSE
 README.md
 pyproject.toml
+.claude/launch.json
 src/dnsboard/__init__.py
 src/dnsboard/cli.py
 src/dnsboard/dashboard.py
@@ -13,3 +15,9 @@ src/dnsboard.egg-info/dependency_links.txt
 src/dnsboard.egg-info/entry_points.txt
 src/dnsboard.egg-info/requires.txt
 src/dnsboard.egg-info/top_level.txt
+src/dnsboard/__pycache__/__init__.cpython-314.pyc
+src/dnsboard/__pycache__/cli.cpython-314.pyc
+src/dnsboard/__pycache__/dashboard.cpython-314.pyc
+src/dnsboard/__pycache__/fetcher.cpython-314.pyc
+src/dnsboard/__pycache__/presets.cpython-314.pyc
+src/dnsboard/__pycache__/server.cpython-314.pyc

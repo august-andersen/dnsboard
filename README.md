@@ -1,8 +1,19 @@
+<div align="center">
+
 # dnsboard
 
-Real-time DNS, SSL, and uptime dashboard for your domains.
+**Real-time DNS, SSL, and uptime dashboard for your domains.**
+
+[![Python](https://img.shields.io/badge/python-3.10+-3776AB?logo=python&logoColor=white)](https://python.org)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Flask](https://img.shields.io/badge/flask-backend-000?logo=flask&logoColor=white)](https://flask.palletsprojects.com)
+[![pipx](https://img.shields.io/badge/install-pipx-blue?logo=pypi&logoColor=white)](https://pipx.pypa.io)
 
 Run `dnsboard example.com` and a browser opens with a live monitoring dashboard.
+
+![dnsboard demo](demo.gif)
+
+</div>
 
 ## Installation
 
